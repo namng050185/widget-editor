@@ -1,5 +1,4 @@
 import { Component, ViewEncapsulation, Input } from '@angular/core';
-import { Widget } from '../types/widget.interface';
 import { CommonModule } from '@angular/common';
 
 @Component({
@@ -11,7 +10,7 @@ import { CommonModule } from '@angular/common';
   styleUrl: './preview.component.scss'
 })
 export class PreviewComponent {
-  @Input() widgets: Widget[] = [];
+  @Input() widgets: any[] = [];
   onDragOver(event: DragEvent): void {
     event.preventDefault();
     event.stopPropagation();

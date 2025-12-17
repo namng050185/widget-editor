@@ -1,6 +1,5 @@
-import { Component, ViewEncapsulation, Output, EventEmitter, Input, signal } from '@angular/core';
+import { Component, Output, EventEmitter, Input, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Widget } from '../types/widget.interface';
 import { AppendService } from '../services/append.service';
 import { ListTypeWidgetComponent } from './components/list-type-widget/list-type-widget.component';
 
@@ -12,12 +11,12 @@ import { ListTypeWidgetComponent } from './components/list-type-widget/list-type
   styleUrl: './widget.component.scss'
 })
 export class WidgetComponent {
-  @Input() widgets: Widget[] = [];
+  @Input() widgets: any[] = [];
 
   @Output() toggleHide = new EventEmitter<void>();
   @Output() widthChange = new EventEmitter<number>();
   @Output() modeChange = new EventEmitter<'pc' | 'tablet' | 'mobile'>();
-  @Output() widgetsReorder = new EventEmitter<Widget[]>();
+  @Output() onWidgetChange = new EventEmitter<any[]>();
 
   protected readonly isHidden = signal(false);
   protected readonly currentWidth = signal(300);
@@ -106,7 +105,7 @@ export class WidgetComponent {
     // Có thể emit event lên parent component để xóa widget
   }
 
-  trackByWidgetId(index: number, widget: Widget): string {
+  trackByWidgetId(index: number, widget: any): string {
     return widget.id;
   }
 
@@ -114,22 +113,15 @@ export class WidgetComponent {
     // Hiển thị modal với component
     this.appendService.showModal({
       component: ListTypeWidgetComponent,
-      data: {
-        typeWidgets: [
-          {
-            id: '1',
-            name: 'Widget 1',
-            description: 'Widget 1',
-            icon: 'icon-1'
-          }
-        ]
-      },
+      data: { },
       title: 'Select widget',
       width: 'w-[1000px] max-w-full',
       closeOnBackdrop: true
     });
     this.appendService.close$.subscribe((data) => {
-      console.log('Widget selected:', data);
+      if (data) {
+        this.onWidgetChange.emit([...this.widgets, data]);
+      }
     });
   }
 
@@ -193,7 +185,7 @@ export class WidgetComponent {
     widgets.splice(targetIndex, 0, draggedWidget);
 
     // Emit event với thứ tự mới
-    this.widgetsReorder.emit(widgets);
+    this.onWidgetChange.emit(widgets);
 
     this.draggedWidgetId = null;
   }

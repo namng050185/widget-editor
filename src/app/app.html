@@ -13,7 +13,7 @@
     [style.width.px]="isLeftPanelHidden() ? 0 : leftPanelWidth()" [style.min-width.px]="isLeftPanelHidden() ? 0 : 200"
     [style.max-width.px]="isLeftPanelHidden() ? 0 : 800" [style.overflow]="'hidden'">
     <app-widget [widgets]="widgets()" (toggleHide)="onToggleLeftPanel()" (widthChange)="onLeftPanelWidthChange($event)"
-      (modeChange)="onPreviewModeChange($event)" (widgetsReorder)="onWidgetsReorder($event)"></app-widget>
+      (modeChange)="onPreviewModeChange($event)" (onWidgetChange)="onWidgetChange($event)"></app-widget>
   </div>
 
   <!-- Resize handle -->

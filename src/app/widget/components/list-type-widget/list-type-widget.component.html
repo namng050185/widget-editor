@@ -1,6 +1,6 @@
 <div class="w-full">
   <!-- Danh sách widgets -->
-  <div class="space-y-2 max-h-[60vh] overflow-y-auto">
+  <div class="space-y-2 max-h-[60vh] overflow-y-auto overflow-x-hidden content-scroll p-4 -m-4">
 
     <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
       <button *ngFor="let widget of typeWidgets" (click)="onSelectWidget(widget)" class="widget-button ">
@@ -27,7 +27,7 @@
     </button>
 
 
-    <button class="scale-button primary" (click)="onSave()" type="button" [disabled]="!selectedWidget">
+    <button class="scale-button primary" (click)="onSelect()" type="button" [disabled]="!selectedWidget">
       Select
     </button>
 

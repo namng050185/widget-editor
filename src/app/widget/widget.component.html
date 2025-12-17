@@ -12,7 +12,8 @@
     <!-- Nút Preview và Save bên phải -->
     <div class="flex items-center gap-4">
       <!-- Nút Preview -->
-      <button class="flex flex-col items-center justify-center text-[#2238df] hover:opacity-80 transition-opacity px-2 rounded"
+      <button
+        class="flex flex-col items-center justify-center text-[#2238df] hover:opacity-80 transition-opacity px-2 rounded"
         (click)="onPreview()" type="button">
         <svg class="w-5 h-5 mb-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z">
@@ -25,7 +26,8 @@
       </button>
 
       <!-- Nút Save -->
-      <button class="flex flex-col items-center justify-center text-[#2238df] hover:opacity-80 transition-opacity px-2 rounded"
+      <button
+        class="flex flex-col items-center justify-center text-[#2238df] hover:opacity-80 transition-opacity px-2 rounded"
         (click)="onSave()" type="button">
         <svg class="w-5 h-5 mb-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -67,8 +69,8 @@
 
           <!-- Title và Description -->
           <div class="flex-1 min-w-0">
-            <h3 class="font-bold text-gray-800 truncate">{{ widget.title }}</h3>
-            <p class="text-sm text-gray-500 truncate">{{ widget.description }}</p>
+            <h3 class="font-bold text-gray-800 truncate">{{ widget.type }}</h3>
+            <p class="text-sm text-gray-500 truncate">{{ widget.title }}</p>
           </div>
 
           <!-- Nút xóa -->
@@ -109,7 +111,7 @@
         </button>
 
         <!-- Nút Sort bên phải -->
-        <button [class]="'scale-button ghost small '" (click)="onSort()" type="button">
+        <button [class]="'scale-button ghost small '" (click)="onSort()" type="button" [disabled]="!widgets.length">
           <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 6h18M7 12h10M4 18h16"></path>
           </svg>
