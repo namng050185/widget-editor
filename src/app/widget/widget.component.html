@@ -2,11 +2,8 @@
   <!-- Header bar -->
   <div class="h-[50px] bg-white border-b border-gray-200 flex items-center justify-between px-4">
     <!-- Nút Close bên trái -->
-    <button 
-      class="flex items-center justify-center text-[#2238df] hover:opacity-80 transition-opacity"
-      (click)="onClose()"
-      type="button"
-    >
+    <button class="flex items-center justify-center text-[#2238df] hover:opacity-80 transition-opacity"
+      (click)="onClose()" type="button">
       <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
       </svg>
@@ -15,26 +12,24 @@
     <!-- Nút Preview và Save bên phải -->
     <div class="flex items-center gap-4">
       <!-- Nút Preview -->
-      <button 
-        class="flex flex-col items-center justify-center text-[#2238df] hover:opacity-80 transition-opacity"
-        (click)="onPreview()"
-        type="button"
-      >
+      <button class="flex flex-col items-center justify-center text-[#2238df] hover:opacity-80 transition-opacity"
+        (click)="onPreview()" type="button">
         <svg class="w-5 h-5 mb-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path>
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z">
+          </path>
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+            d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z">
+          </path>
         </svg>
         <span class="text-xs font-medium">Preview</span>
       </button>
 
       <!-- Nút Save -->
-      <button 
-        class="flex flex-col items-center justify-center text-[#2238df] hover:opacity-80 transition-opacity"
-        (click)="onSave()"
-        type="button"
-      >
+      <button class="flex flex-col items-center justify-center text-[#2238df] hover:opacity-80 transition-opacity"
+        (click)="onSave()" type="button">
         <svg class="w-5 h-5 mb-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7H5a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-3m-1 4l-3 3m0 0l-3-3m3 3V4"></path>
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+            d="M8 7H5a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-3m-1 4l-3 3m0 0l-3-3m3 3V4"></path>
         </svg>
         <span class="text-xs font-medium">Save</span>
       </button>
@@ -43,7 +38,53 @@
 
   <!-- Content area -->
   <div class="flex-1 overflow-auto">
-    <!-- Nội dung widget sẽ được thêm vào đây -->
+    <!-- Danh sách widgets -->
+    <div>
+      <div *ngFor="let widget of widgets; trackBy: trackByWidgetId"
+        class="bg-white border border-gray-200 rounded-lg overflow-hidden">
+        <!-- Widget header -->
+        <div class="flex items-center gap-2 p-2 hover:bg-gray-50 transition-colors">
+          <!-- Mũi tên đóng/mở cấu hình -->
+          <button class="flex items-center justify-center w-4 h-4 text-gray-500 hover:text-[#2238df] transition-colors"
+            (click)="toggleWidgetConfig(widget.id)" type="button"
+            [title]="isWidgetConfigOpen(widget.id) ? 'Đóng cấu hình' : 'Mở cấu hình'">
+            <svg class="w-4 h-4 transition-transform" [class.rotate-180]="isWidgetConfigOpen(widget.id)" fill="none"
+              stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+            </svg>
+          </button>
+
+          <!-- Title và Description -->
+          <div class="flex-1 min-w-0">
+            <h3 class="font-bold text-sm text-gray-800 truncate">{{ widget.title }}</h3>
+            <p class="text-xs text-gray-500 truncate">{{ widget.description }}</p>
+          </div>
+
+          <!-- Nút xóa -->
+          <button class="flex items-center justify-center w-8 h-8 text-[#2238df] rounded transition-colors"
+            (click)="onDeleteWidget(widget.id)" type="button" title="Xóa widget">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16">
+              </path>
+            </svg>
+          </button>
+        </div>
+
+        <!-- Widget config (ẩn/hiện) -->
+        <div class="border-t border-gray-200 bg-gray-50" [class.hidden]="!isWidgetConfigOpen(widget.id)">
+          <div class="p-3">
+            <p class="text-sm text-gray-600">Cấu hình widget: {{ widget.title }}</p>
+            <!-- Nội dung cấu hình widget sẽ được thêm vào đây -->
+          </div>
+        </div>
+      </div>
+
+      <!-- Empty state -->
+      <div *ngIf="widgets.length === 0" class="text-center py-8 text-gray-400">
+        <p>Chưa có widget nào</p>
+      </div>
+    </div>
   </div>
 
   <!-- Footer bar -->
@@ -51,24 +92,19 @@
     <!-- Bên trái: Nút Hide và nút thay đổi độ rộng -->
     <div class="flex items-center gap-3">
       <!-- Nút Hide -->
-      <button 
-        class="flex items-center justify-center text-[#2238df] hover:opacity-80 transition-opacity"
-        (click)="onToggleHide()"
-        type="button"
-        [title]="isHidden() ? 'Show Panel' : 'Hide Panel'"
-      >
+      <button class="flex items-center justify-center text-[#2238df] hover:opacity-80 transition-opacity"
+        (click)="onToggleHide()" type="button" [title]="isHidden() ? 'Show Panel' : 'Hide Panel'">
         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" [attr.d]="isHidden() ? 'M9 5l7 7-7 7' : 'M15 19l-7-7 7-7'"></path>
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+            [attr.d]="isHidden() ? 'M9 5l7 7-7 7' : 'M15 19l-7-7 7-7'"></path>
         </svg>
       </button>
 
       <!-- Nút thay đổi độ rộng -->
       <div class="flex items-center border-l border-gray-300 pl-3">
-        <button 
+        <button
           class="px-3 py-1 text-xs font-medium text-[#2238df] hover:bg-blue-50 rounded transition-colors bg-blue-100"
-          (click)="onToggleWidth()"
-          type="button"
-        >
+          (click)="onToggleWidth()" type="button">
           {{ getWidthLabel() }}
         </button>
       </div>
@@ -77,44 +113,34 @@
     <!-- Bên phải: 3 nút mode PC, Tablet, Mobile -->
     <div class="flex items-center gap-2">
       <!-- Nút PC -->
-      <button 
-        class="flex items-center justify-center w-8 h-8 text-[#2238df] hover:bg-blue-50 rounded transition-colors"
-        [class.bg-blue-100]="currentMode() === 'pc'"
-        (click)="onModeChange('pc')"
-        type="button"
-        title="PC Mode"
-      >
+      <button class="flex items-center justify-center w-8 h-8 text-[#2238df] hover:bg-blue-50 rounded transition-colors"
+        [class.bg-blue-100]="currentMode() === 'pc'" (click)="onModeChange('pc')" type="button" title="PC Mode">
         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+            d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z">
+          </path>
         </svg>
       </button>
 
       <!-- Nút Tablet -->
-      <button 
-        class="flex items-center justify-center w-8 h-8 text-[#2238df] hover:bg-blue-50 rounded transition-colors"
-        [class.bg-blue-100]="currentMode() === 'tablet'"
-        (click)="onModeChange('tablet')"
-        type="button"
-        title="Tablet Mode"
-      >
+      <button class="flex items-center justify-center w-8 h-8 text-[#2238df] hover:bg-blue-50 rounded transition-colors"
+        [class.bg-blue-100]="currentMode() === 'tablet'" (click)="onModeChange('tablet')" type="button"
+        title="Tablet Mode">
         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 18h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z"></path>
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+            d="M12 18h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z"></path>
         </svg>
       </button>
 
       <!-- Nút Mobile -->
-      <button 
-        class="flex items-center justify-center w-8 h-8 text-[#2238df] hover:bg-blue-50 rounded transition-colors"
-        [class.bg-blue-100]="currentMode() === 'mobile'"
-        (click)="onModeChange('mobile')"
-        type="button"
-        title="Mobile Mode"
-      >
+      <button class="flex items-center justify-center w-8 h-8 text-[#2238df] hover:bg-blue-50 rounded transition-colors"
+        [class.bg-blue-100]="currentMode() === 'mobile'" (click)="onModeChange('mobile')" type="button"
+        title="Mobile Mode">
         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z"></path>
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+            d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z"></path>
         </svg>
       </button>
     </div>
   </div>
 </div>
-
