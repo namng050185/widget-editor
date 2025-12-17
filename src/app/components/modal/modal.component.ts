@@ -24,6 +24,7 @@ export class ModalComponent implements OnInit, AfterViewInit, OnDestroy {
   currentTitle: string = '';
   currentCloseOnBackdrop: boolean = true;
   private subscription?: Subscription;
+  private closeSubscription?: Subscription;
 
   constructor(private appendService: AppendService) { }
 
@@ -59,6 +60,11 @@ export class ModalComponent implements OnInit, AfterViewInit, OnDestroy {
         document.body.style.overflow = '';
       }
     });
+
+    // Subscribe to close events from component
+    this.closeSubscription = this.appendService.close$.subscribe(() => {
+      this.onClose();
+    });
   }
 
   ngAfterViewInit(): void {
@@ -68,6 +74,7 @@ export class ModalComponent implements OnInit, AfterViewInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.subscription?.unsubscribe();
+    this.closeSubscription?.unsubscribe();
     document.body.style.overflow = '';
   }
 

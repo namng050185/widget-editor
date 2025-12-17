@@ -128,6 +128,9 @@ export class WidgetComponent {
       width: 'w-[800px] max-w-full',
       closeOnBackdrop: true
     });
+    this.appendService.close$.subscribe((data) => {
+      console.log('Widget selected:', data);
+    });
   }
 
   onSort(): void {

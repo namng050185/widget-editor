@@ -1,4 +1,4 @@
-import { Injectable, ComponentRef, ViewContainerRef, TemplateRef, Type } from '@angular/core';
+import { Injectable, ComponentRef, ViewContainerRef, TemplateRef, Type, EventEmitter } from '@angular/core';
 import { Subject } from 'rxjs';
 
 export interface ModalConfig {
@@ -16,7 +16,10 @@ export interface ModalConfig {
 export class AppendService {
   private modalSubject = new Subject<{ show: boolean; config?: ModalConfig }>();
   public modal$ = this.modalSubject.asObservable();
-
+  
+  private closeSubject = new Subject<any>();
+  public close$ = this.closeSubject.asObservable();
+  
   private viewContainerRef?: ViewContainerRef;
   private componentRef?: ComponentRef<any>;
   private pendingConfig?: ModalConfig;
@@ -62,7 +65,20 @@ export class AppendService {
           this.componentRef?.setInput(key, config.data[key]);
         });
       }
+
+      // Subscribe to component's close event if it exists
+      if (this.componentRef.instance.close && this.componentRef.instance.close instanceof EventEmitter) {
+        this.componentRef.instance.close.subscribe((data?: any) => {
+          this.closeModalWithData(data);
+        });
+      }
     }
+  }
+
+  closeModalWithData(data?: any): void {
+    // Emit data before closing
+    this.closeSubject.next(data);
+    this.closeModal();
   }
 
   triggerComponentCreation(): void {

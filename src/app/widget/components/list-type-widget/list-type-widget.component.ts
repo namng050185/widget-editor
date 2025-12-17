@@ -20,7 +20,7 @@ export interface TypeWidget {
 export class ListTypeWidgetComponent {
     @Input() typeWidgets: TypeWidget[] = [];
     @Output() widgetSelected = new EventEmitter<TypeWidget>();
-    @Output() close = new EventEmitter<void>();
+    @Output() close = new EventEmitter<any>();
 
     ngOnInit(): void {
         console.log(this.typeWidgets);
@@ -30,8 +30,12 @@ export class ListTypeWidgetComponent {
         this.widgetSelected.emit(widget);
     }
 
+    onSave(): void {
+        this.close.emit(true);
+    }
+
     onClose(): void {
-        this.close.emit();
+        this.close.emit(false);
     }
 }
 
