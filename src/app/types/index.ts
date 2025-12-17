@@ -159,7 +159,7 @@ export const getWidgetTypes = (): Record<string, TypeWidget> => {
     banner: {
       type: 'banner',
       title: 'BANNER',
-      image: 'assets/widgets/banner.png',
+      image: '/widgets/banner.png',
       example: {
         styles: {},
         value: {
