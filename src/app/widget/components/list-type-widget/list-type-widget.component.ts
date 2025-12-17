@@ -1,14 +1,10 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { TypeWidget } from '../../../types/widget.interface';
+import { values } from 'lodash';
+import { getWidgetTypes } from '../../../types';
 
-export interface TypeWidget {
-    id: string;
-    name: string;
-    description: string;
-    icon?: string;
-    category?: string;
-    data?: any;
-}
+
 
 @Component({
     selector: 'app-list-type-widget',
@@ -21,13 +17,14 @@ export class ListTypeWidgetComponent {
     @Input() typeWidgets: TypeWidget[] = [];
     @Output() widgetSelected = new EventEmitter<TypeWidget>();
     @Output() close = new EventEmitter<any>();
-
+    selectedWidget: TypeWidget | null = null;
     ngOnInit(): void {
-        console.log(this.typeWidgets);
+        this.typeWidgets = values(getWidgetTypes());
     }
 
     onSelectWidget(widget: TypeWidget): void {
-        this.widgetSelected.emit(widget);
+        this.selectedWidget = widget;
+        this.widgetSelected.emit(this.selectedWidget);
     }
 
     onSave(): void {

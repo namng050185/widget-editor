@@ -1,9 +1,11 @@
 import { Component, ViewEncapsulation, Input } from '@angular/core';
 import { Widget } from '../types/widget.interface';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-preview',
   standalone: true,
+  imports: [CommonModule],
   encapsulation: ViewEncapsulation.ShadowDom,
   templateUrl: './preview.component.html',
   styleUrl: './preview.component.scss'

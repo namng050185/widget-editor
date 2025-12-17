@@ -6,3 +6,9 @@ export interface Widget {
   data: any;
 }
 
+export interface TypeWidget {
+  type: string;
+  title: string;
+  image?: string;
+  example?: any;
+}

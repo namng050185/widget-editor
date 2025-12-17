@@ -125,7 +125,7 @@ export class WidgetComponent {
         ]
       },
       title: 'Select widget',
-      width: 'w-[800px] max-w-full',
+      width: 'w-[1000px] max-w-full',
       closeOnBackdrop: true
     });
     this.appendService.close$.subscribe((data) => {
