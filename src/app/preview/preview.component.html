@@ -1,3 +1,5 @@
-<div *ngFor="let widget of widgets;">
-    <div>{{ widget.title }}</div>
+@for (widget of widgets; track widget.id) {
+<div class="pt-8">
+   
 </div>
+}

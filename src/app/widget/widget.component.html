@@ -47,7 +47,7 @@
         [draggable]="isSortMode()" (dragstart)="onDragStart($event, widget.id)" (dragend)="onDragEnd($event)"
         (dragover)="onDragOver($event)" (drop)="onDrop($event, widget.id)">
         <!-- Widget header -->
-        <div class="flex items-center gap-2 p-2 hover:bg-gray-50 transition-colors" [class.bg-blue-50]="isSortMode()">
+        <div class="flex items-center gap-2 p-1 hover:bg-gray-50 transition-colors" [class.bg-blue-50]="isSortMode()">
           <!-- Mũi tên đóng/mở cấu hình hoặc icon kéo thả khi sort -->
           <button *ngIf="!isSortMode()"
             class="flex items-center justify-center p-1 text-gray-500 hover:text-[#2238df] transition-colors rounded"
@@ -69,7 +69,7 @@
 
           <!-- Title và Description -->
           <div class="flex-1 min-w-0">
-            <h3 class="font-bold text-gray-800 truncate">{{ widget.type }}</h3>
+            <h3 class="font-bold text-xs  text-gray-800 truncate">{{ widget.type }}</h3>
             <p class="text-sm text-gray-500 truncate">{{ widget.title }}</p>
           </div>
 
