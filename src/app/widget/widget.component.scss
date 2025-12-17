@@ -1,2 +1,40 @@
 // Widget component styles
 
+// Custom scrollbar - nhỏ hơn và tinh tế hơn
+.content-scroll {
+  // Firefox
+  scrollbar-width: thin;
+  scrollbar-color: #cbd5e1 #f1f5f9;
+
+  // Chrome, Safari, Edge
+  &::-webkit-scrollbar {
+    width: 2px;
+    height: 2px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: #f1f5f9;
+    border-radius: 2px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: #cbd5e1;
+    border-radius: 2px;
+    transition: background 0.2s;
+
+    &:hover {
+      background: #94a3b8;
+    }
+  }
+
+  // Horizontal scrollbar
+  &::-webkit-scrollbar-thumb:horizontal {
+    background: #cbd5e1;
+    border-radius: 2px;
+
+    &:hover {
+      background: #94a3b8;
+    }
+  }
+}
+

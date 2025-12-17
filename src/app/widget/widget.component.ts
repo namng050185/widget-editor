@@ -101,5 +101,15 @@ export class WidgetComponent {
   trackByWidgetId(index: number, widget: Widget): string {
     return widget.id;
   }
+
+  onAddWidget(): void {
+    // Xử lý logic thêm widget
+    console.log('Add widget clicked');
+  }
+
+  onSort(): void {
+    // Xử lý logic sắp xếp widget
+    console.log('Sort clicked');
+  }
 }
 

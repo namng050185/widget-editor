@@ -37,11 +37,11 @@
   </div>
 
   <!-- Content area -->
-  <div class="flex-1 overflow-auto">
+  <div class="flex-1 overflow-auto content-scroll">
     <!-- Danh sách widgets -->
-    <div>
+    <div class="">
       <div *ngFor="let widget of widgets; trackBy: trackByWidgetId"
-        class="bg-white border border-gray-200 rounded-lg overflow-hidden">
+        class="bg-white border border-gray-200  overflow-hidden">
         <!-- Widget header -->
         <div class="flex items-center gap-2 p-2 hover:bg-gray-50 transition-colors">
           <!-- Mũi tên đóng/mở cấu hình -->
@@ -83,6 +83,33 @@
       <!-- Empty state -->
       <div *ngIf="widgets.length === 0" class="text-center py-8 text-gray-400">
         <p>Chưa có widget nào</p>
+      </div>
+
+      <!-- Add widget và Sort buttons -->
+      <div class="flex items-center justify-between p-2 border-t border-gray-200">
+        <!-- Nút Add Widget bên trái -->
+        <button 
+          class="flex items-center gap-2 px-3 py-2 text-sm font-medium text-[#2238df] hover:bg-blue-50 rounded transition-colors"
+          (click)="onAddWidget()"
+          type="button"
+        >
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
+          </svg>
+          <span>Add Widget</span>
+        </button>
+
+        <!-- Nút Sort bên phải -->
+        <button 
+          class="flex items-center gap-2 px-3 py-2 text-sm font-medium text-[#2238df] hover:bg-blue-50 rounded transition-colors"
+          (click)="onSort()"
+          type="button"
+        >
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 6h18M7 12h10M4 18h16"></path>
+          </svg>
+          <span>Sort</span>
+        </button>
       </div>
     </div>
   </div>
