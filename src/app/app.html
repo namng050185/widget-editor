@@ -12,7 +12,7 @@
   <div class="bg-gray-100 border-r border-gray-300 overflow-auto transition-all duration-300"
     [style.width.px]="isLeftPanelHidden() ? 0 : leftPanelWidth()" [style.min-width.px]="isLeftPanelHidden() ? 0 : 200"
     [style.max-width.px]="isLeftPanelHidden() ? 0 : 800" [style.overflow]="'hidden'">
-    <app-widget [widgets]="widgets" (toggleHide)="onToggleLeftPanel()" (widthChange)="onLeftPanelWidthChange($event)"
+    <app-widget [widgets]="widgets()" (toggleHide)="onToggleLeftPanel()" (widthChange)="onLeftPanelWidthChange($event)"
       (modeChange)="onPreviewModeChange($event)" (widgetsReorder)="onWidgetsReorder($event)"></app-widget>
   </div>
 
@@ -27,6 +27,6 @@
 
   <!-- Panel bên phải -->
   <div class="flex-1 bg-white overflow-auto">
-    <app-preview [widgets]="widgets"></app-preview>
+    <app-preview [widgets]="widgets()"></app-preview>
   </div>
 </div>

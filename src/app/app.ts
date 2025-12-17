@@ -15,33 +15,28 @@ export class App {
   protected readonly leftPanelWidth = signal(300);
   protected readonly isLeftPanelHidden = signal(false);
   protected readonly previewMode = signal<'pc' | 'tablet' | 'mobile'>('pc');
+  protected readonly widgets = signal<Widget[]>([
+    { id: '1', title: 'Widget 1', description: 'Widget 1 description', type: 'widget', data: {} },
+    { id: '2', title: 'Widget 2', description: 'Widget 2 description', type: 'widget', data: {} },
+    { id: '3', title: 'Widget 3', description: 'Widget 3 description', type: 'widget', data: {} },
+    { id: '4', title: 'Widget 4', description: 'Widget 4 description', type: 'widget', data: {} },
+    { id: '5', title: 'Widget 5', description: 'Widget 5 description', type: 'widget', data: {} },
+    { id: '6', title: 'Widget 6', description: 'Widget 6 description', type: 'widget', data: {} },
+    { id: '7', title: 'Widget 7', description: 'Widget 7 description', type: 'widget', data: {} },
+    { id: '8', title: 'Widget 8', description: 'Widget 8 description', type: 'widget', data: {} },
+    { id: '9', title: 'Widget 9', description: 'Widget 9 description', type: 'widget', data: {} },
+    { id: '10', title: 'Widget 10', description: 'Widget 10 description', type: 'widget', data: {} },
+    { id: '11', title: 'Widget 11', description: 'Widget 11 description', type: 'widget', data: {} },
+    { id: '12', title: 'Widget 12', description: 'Widget 12 description', type: 'widget', data: {} },
+    { id: '13', title: 'Widget 13', description: 'Widget 13 description', type: 'widget', data: {} },
+    { id: '14', title: 'Widget 14', description: 'Widget 14 description', type: 'widget', data: {} },
+    { id: '15', title: 'Widget 15', description: 'Widget 15 description', type: 'widget', data: {} },
+    { id: '16', title: 'Widget 16', description: 'Widget 16 description', type: 'widget', data: {} },
+    { id: '17', title: 'Widget 17', description: 'Widget 17 description', type: 'widget', data: {} },
+  ]);
   private isResizing = false;
   private startX = 0;
   private startWidth = 0;
-
-  widgets: Widget[] = [];
-
-  constructor() {
-    this.widgets = [
-      { id: '1', title: 'Widget 1', description: 'Widget 1 description', type: 'widget', data: {} },
-      { id: '2', title: 'Widget 2', description: 'Widget 2 description', type: 'widget', data: {} },
-      { id: '3', title: 'Widget 3', description: 'Widget 3 description', type: 'widget', data: {} },
-      { id: '4', title: 'Widget 4', description: 'Widget 4 description', type: 'widget', data: {} },
-      { id: '5', title: 'Widget 5', description: 'Widget 5 description', type: 'widget', data: {} },
-      { id: '6', title: 'Widget 6', description: 'Widget 6 description', type: 'widget', data: {} },
-      { id: '7', title: 'Widget 7', description: 'Widget 7 description', type: 'widget', data: {} },
-      { id: '8', title: 'Widget 8', description: 'Widget 8 description', type: 'widget', data: {} },
-      { id: '9', title: 'Widget 9', description: 'Widget 9 description', type: 'widget', data: {} },
-      { id: '10', title: 'Widget 10', description: 'Widget 10 description', type: 'widget', data: {} },
-      { id: '11', title: 'Widget 11', description: 'Widget 11 description', type: 'widget', data: {} },
-      { id: '12', title: 'Widget 12', description: 'Widget 12 description', type: 'widget', data: {} },
-      { id: '13', title: 'Widget 13', description: 'Widget 13 description', type: 'widget', data: {} },
-      { id: '14', title: 'Widget 14', description: 'Widget 14 description', type: 'widget', data: {} },
-      { id: '15', title: 'Widget 15', description: 'Widget 15 description', type: 'widget', data: {} },
-      { id: '16', title: 'Widget 16', description: 'Widget 16 description', type: 'widget', data: {} },
-      { id: '17', title: 'Widget 17', description: 'Widget 17 description', type: 'widget', data: {} },
-    ];
-  }
 
   startResize(event: MouseEvent): void {
     this.isResizing = true;
@@ -95,6 +90,6 @@ export class App {
 
   onWidgetsReorder(reorderedWidgets: Widget[]): void {
     // Cập nhật thứ tự widgets
-    this.widgets = reorderedWidgets;
+    this.widgets.set(reorderedWidgets);
   }
 }
