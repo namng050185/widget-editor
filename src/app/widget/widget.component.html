@@ -1,8 +1,8 @@
 <div class="h-full flex flex-col">
   <!-- Header bar -->
-  <div class="h-[50px] bg-white border-b border-gray-200 flex items-center justify-between px-4">
+  <div class="h-[50px] bg-white border-b border-gray-200 flex items-center justify-between px-2">
     <!-- Nút Close bên trái -->
-    <button class="flex items-center justify-center text-[#2238df] hover:opacity-80 transition-opacity"
+    <button class="flex items-center justify-center text-[#2238df] hover:opacity-80 transition-opacity p-2 rounded"
       (click)="onClose()" type="button">
       <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
@@ -12,7 +12,7 @@
     <!-- Nút Preview và Save bên phải -->
     <div class="flex items-center gap-4">
       <!-- Nút Preview -->
-      <button class="flex flex-col items-center justify-center text-[#2238df] hover:opacity-80 transition-opacity"
+      <button class="flex flex-col items-center justify-center text-[#2238df] hover:opacity-80 transition-opacity px-2 rounded"
         (click)="onPreview()" type="button">
         <svg class="w-5 h-5 mb-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z">
@@ -25,7 +25,7 @@
       </button>
 
       <!-- Nút Save -->
-      <button class="flex flex-col items-center justify-center text-[#2238df] hover:opacity-80 transition-opacity"
+      <button class="flex flex-col items-center justify-center text-[#2238df] hover:opacity-80 transition-opacity px-2 rounded"
         (click)="onSave()" type="button">
         <svg class="w-5 h-5 mb-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
