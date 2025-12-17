@@ -1,1 +1,3 @@
-<p>preview-title works!</p>
+<div [class]="'headline ' + widget.headline" [ngStyle]="{'color': widget.color, 'text-align': widget.align}">
+    {{widget.value}}
+</div>

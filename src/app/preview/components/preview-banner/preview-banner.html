@@ -1,1 +1,18 @@
-<p>preview-banner works!</p>
+@for (item of widget.value.items; track item.id) {
+<div class="banner-item">
+    <div class="banner-image">
+        <img [src]="item.template.backgroundImage" [alt]="item.title">
+    </div>
+    <div class="banner-content">
+        <h3>{{item.title}}</h3>
+        <p>{{item.description}}</p>
+    </div>
+</div>
+}
+@if (widget.value.items.length > 1) {
+<div class="banner-pagination">
+    @for (item of widget.value.items; let i = $index; track $index) {
+    <span [class]="'bullet '+(i==activeIndex?'active':'')"></span>
+    }
+</div>
+}
