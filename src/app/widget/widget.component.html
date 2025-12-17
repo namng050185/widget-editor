@@ -41,33 +41,24 @@
     <!-- Danh sách widgets -->
     <div class="">
       <div *ngFor="let widget of widgets; trackBy: trackByWidgetId"
-        class="widget-item bg-white border border-gray-200 overflow-hidden"
-        [class.cursor-move]="isSortMode()"
-        [draggable]="isSortMode()"
-        (dragstart)="onDragStart($event, widget.id)"
-        (dragend)="onDragEnd($event)"
-        (dragover)="onDragOver($event)"
-        (drop)="onDrop($event, widget.id)">
+        class="widget-item bg-white border border-gray-200 overflow-hidden" [class.cursor-move]="isSortMode()"
+        [draggable]="isSortMode()" (dragstart)="onDragStart($event, widget.id)" (dragend)="onDragEnd($event)"
+        (dragover)="onDragOver($event)" (drop)="onDrop($event, widget.id)">
         <!-- Widget header -->
-        <div class="flex items-center gap-2 p-2 hover:bg-gray-50 transition-colors"
-          [class.bg-blue-50]="isSortMode()">
+        <div class="flex items-center gap-2 p-2 hover:bg-gray-50 transition-colors" [class.bg-blue-50]="isSortMode()">
           <!-- Mũi tên đóng/mở cấu hình hoặc icon kéo thả khi sort -->
-          <button 
-            *ngIf="!isSortMode()"
-            class="flex items-center justify-center w-4 h-4 text-gray-500 hover:text-[#2238df] transition-colors"
-            (click)="toggleWidgetConfig(widget.id)" 
-            type="button"
+          <button *ngIf="!isSortMode()"
+            class="flex items-center justify-center p-1 text-gray-500 hover:text-[#2238df] transition-colors rounded"
+            (click)="toggleWidgetConfig(widget.id)" type="button"
             [title]="isWidgetConfigOpen(widget.id) ? 'Đóng cấu hình' : 'Mở cấu hình'">
             <svg class="w-4 h-4 transition-transform" [class.rotate-180]="isWidgetConfigOpen(widget.id)" fill="none"
               stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
             </svg>
           </button>
-          
+
           <!-- Icon kéo thả khi ở chế độ sort -->
-          <div 
-            *ngIf="isSortMode()"
-            class="flex items-center justify-center w-4 h-4 text-[#2238df] cursor-move"
+          <div *ngIf="isSortMode()" class="flex items-center justify-center w-4 h-4 text-[#2238df] cursor-move"
             title="Kéo để sắp xếp">
             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 8h16M4 12h16M4 16h16"></path>
@@ -76,20 +67,15 @@
 
           <!-- Title và Description -->
           <div class="flex-1 min-w-0">
-            <h3 class="font-bold text-sm text-gray-800 truncate">{{ widget.title }}</h3>
-            <p class="text-xs text-gray-500 truncate">{{ widget.description }}</p>
+            <h3 class="font-bold text-gray-800 truncate">{{ widget.title }}</h3>
+            <p class="text-sm text-gray-500 truncate">{{ widget.description }}</p>
           </div>
 
           <!-- Nút xóa -->
-          <button 
-            class="flex items-center justify-center w-8 h-8 rounded transition-colors"
-            [class.text-[#2238df]]="!isSortMode()"
-            [class.text-gray-300]="isSortMode()"
-            [class.cursor-not-allowed]="isSortMode()"
-            [disabled]="isSortMode()"
-            (click)="onDeleteWidget(widget.id)" 
-            type="button" 
-            [title]="isSortMode() ? 'Không thể xóa khi đang sắp xếp' : 'Xóa widget'">
+          <button class="flex items-center justify-center w-8 h-8 rounded transition-colors"
+            [class.text-[#2238df]]="!isSortMode()" [class.text-gray-300]="isSortMode()"
+            [class.cursor-not-allowed]="isSortMode()" [disabled]="isSortMode()" (click)="onDeleteWidget(widget.id)"
+            type="button" [title]="isSortMode() ? 'Không thể xóa khi đang sắp xếp' : 'Xóa widget'">
             <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                 d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16">
@@ -101,7 +87,7 @@
         <!-- Widget config (ẩn/hiện) -->
         <div class="border-t border-gray-200 bg-gray-50" [class.hidden]="!isWidgetConfigOpen(widget.id)">
           <div class="p-3">
-            <p class="text-sm text-gray-600">Cấu hình widget: {{ widget.title }}</p>
+            <p class="text-sm text-gray-600">Widget configuration: {{ widget.title }}</p>
             <!-- Nội dung cấu hình widget sẽ được thêm vào đây -->
           </div>
         </div>
@@ -109,17 +95,13 @@
 
       <!-- Empty state -->
       <div *ngIf="widgets.length === 0" class="text-center py-8 text-gray-400">
-        <p>Chưa có widget nào</p>
+        <p>No widget found</p>
       </div>
 
       <!-- Add widget và Sort buttons -->
       <div class="flex items-center justify-between p-2 border-t border-gray-200">
         <!-- Nút Add Widget bên trái -->
-        <button 
-          class="flex items-center gap-2 px-3 py-2 text-sm font-medium text-[#2238df] hover:bg-blue-50 rounded transition-colors"
-          (click)="onAddWidget()"
-          type="button"
-        >
+        <button class="scale-button ghost small" (click)="onAddWidget()" type="button">
           <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
           </svg>
@@ -127,17 +109,7 @@
         </button>
 
         <!-- Nút Sort bên phải -->
-        <button 
-          class="flex items-center gap-2 px-3 py-2 text-sm font-medium rounded transition-colors"
-          [class.bg-blue-100]="isSortMode()"
-          [class.text-[#2238df]]="!isSortMode()"
-          [class.text-white]="isSortMode()"
-          [class.bg-[#2238df]]="isSortMode()"
-          [class.hover:bg-blue-50]="!isSortMode()"
-          [class.hover:bg-[#1a2bc4]]="isSortMode()"
-          (click)="onSort()"
-          type="button"
-        >
+        <button [class]="'scale-button ghost small '" (click)="onSort()" type="button">
           <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 6h18M7 12h10M4 18h16"></path>
           </svg>

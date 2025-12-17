@@ -124,7 +124,7 @@ export class WidgetComponent {
           }
         ]
       },
-      title: 'Chọn widget',
+      title: 'Select widget',
       width: 'w-[800px] max-w-full',
       closeOnBackdrop: true
     });

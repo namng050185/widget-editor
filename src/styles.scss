@@ -2,3 +2,189 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@font-face {
+    font-family: 'TeleNeoWeb';
+    font-weight: 900;
+    font-style: normal;
+    src: url('/fonts/TeleNeoWeb-Ultra.eot');
+    src: url('/fonts/TeleNeoWeb-Ultra.woff') format('woff'),
+        url('/fonts/TeleNeoWeb-Ultra.woff2') format('woff2');
+    font-display: swap
+}
+
+@font-face {
+    font-family: 'TeleNeoWeb';
+    font-weight: 900;
+    font-style: italic;
+    src: url('/fonts/TeleNeoWeb-UltraItalic.eot');
+    src: url('/fonts/TeleNeoWeb-UltraItalic.woff') format('woff'),
+        url('/fonts/TeleNeoWeb-UltraItalic.woff2') format('woff2');
+    font-display: swap
+}
+
+@font-face {
+    font-family: 'TeleNeoWeb';
+    font-weight: 800;
+    font-style: normal;
+    src: url('/fonts/TeleNeoWeb-ExtraBold.eot');
+    src: url('/fonts/TeleNeoWeb-ExtraBold.woff') format('woff'),
+        url('/fonts/TeleNeoWeb-ExtraBold.woff2') format('woff2');
+    font-display: swap
+}
+
+@font-face {
+    font-family: 'TeleNeoWeb';
+    font-weight: 800;
+    font-style: italic;
+    src: url('/fonts/TeleNeoWeb-ExtraBoldItalic.eot');
+    src: url('/fonts/TeleNeoWeb-ExtraBoldItalic.woff') format('woff'),
+        url('/fonts/TeleNeoWeb-ExtraBoldItalic.woff2') format('woff2');
+    font-display: swap
+}
+
+@font-face {
+    font-family: 'TeleNeoWeb';
+    font-weight: 700;
+    font-style: normal;
+    src: url('/fonts/TeleNeoWeb-Bold.eot');
+    src: url('/fonts/TeleNeoWeb-Bold.woff') format('woff'),
+        url('/fonts/TeleNeoWeb-Bold.woff2') format('woff2');
+    font-display: swap
+}
+
+@font-face {
+    font-family: 'TeleNeoWeb';
+    font-weight: 700;
+    font-style: italic;
+    src: url('/fonts/TeleNeoWeb-BoldItalic.eot');
+    src: url('/fonts/TeleNeoWeb-BoldItalic.woff') format('woff'),
+        url('/fonts/TeleNeoWeb-BoldItalic.woff2') format('woff2');
+    font-display: swap
+}
+
+@font-face {
+    font-family: 'TeleNeoWeb';
+    font-weight: 500;
+    font-style: normal;
+    src: url('/fonts/TeleNeoWeb-Medium.eot');
+    src: url('/fonts/TeleNeoWeb-Medium.woff') format('woff'),
+        url('/fonts/TeleNeoWeb-Medium.woff2') format('woff2');
+    font-display: swap
+}
+
+@font-face {
+    font-family: 'TeleNeoWeb';
+    font-weight: 500;
+    font-style: italic;
+    src: url('/fonts/TeleNeoWeb-MediumItalic.eot');
+    src: url('/fonts/TeleNeoWeb-MediumItalic.woff') format('woff'),
+        url('/fonts/TeleNeoWeb-MediumItalic.woff2') format('woff2');
+    font-display: swap
+}
+
+@font-face {
+    font-family: 'TeleNeoWeb';
+    font-weight: 400;
+    font-style: normal;
+    src: url('/fonts/TeleNeoWeb-Regular.eot');
+    src: url('/fonts/TeleNeoWeb-Regular.woff') format('woff'),
+        url('/fonts/TeleNeoWeb-Regular.woff2') format('woff2');
+    font-display: swap
+}
+
+@font-face {
+    font-family: 'TeleNeoWeb';
+    font-weight: 400;
+    font-style: italic;
+    src: url('/fonts/TeleNeoWeb-RegularItalic.eot');
+    src: url('/fonts/TeleNeoWeb-RegularItalic.woff') format('woff'),
+        url('/fonts/TeleNeoWeb-RegularItalic.woff2') format('woff2');
+    font-display: swap
+}
+
+@font-face {
+    font-family: 'TeleNeoWeb';
+    font-weight: 200;
+    font-style: normal;
+    src: url('/fonts/TeleNeoWeb-Thin.eot');
+    src: url('/fonts/TeleNeoWeb-Thin.woff') format('woff'),
+        url('/fonts/TeleNeoWeb-Thin.woff2') format('woff2');
+    font-display: swap
+}
+
+@font-face {
+    font-family: 'TeleNeoWeb';
+    font-weight: 200;
+    font-style: italic;
+    src: url('/fonts/TeleNeoWeb-ThinItalic.eot');
+    src: url('/fonts/TeleNeoWeb-ThinItalic.woff') format('woff'),
+        url('/fonts/TeleNeoWeb-ThinItalic.woff2') format('woff2');
+    font-display: swap
+}
+
+:root {
+    font-family: 'TeleNeoWeb', sans-serif
+}
+
+body {
+    font-family: 'TeleNeoWeb', sans-serif;
+}
+
+button {
+    &.scale-button {
+        padding: 0 20px;
+        height: 44px;
+        font-size: 16px;
+        font-weight: 700;
+        border-radius: 8px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+    }
+
+    &.small {
+        padding: 0 10px;
+        height: 32px;
+    }
+
+    &.secondary {
+        border: rgba(0, 0, 0, 0.44) 1px solid;
+        background-color: #fff;
+        color: #000;
+
+
+        &:hover {
+            background-color: rgba(0, 0, 0, 0.07);
+        }
+    }
+
+
+    &.primary {
+        border: #e20074 1px solid;
+        background-color: #e20074;
+        color: #FFF;
+
+        &:hover {
+            background-color: #c00063;
+        }
+    }
+
+    &.ghost {
+        border: rgba(0, 0, 0, 0) 1px solid;
+        background-color: transparent;
+        color: #2238df;
+
+
+        &:hover {
+            background-color: rgba(0, 0, 0, 0.07);
+        }
+    }
+
+    &:focus {
+        outline: #1c41eb 2px solid !important;
+    }
+}

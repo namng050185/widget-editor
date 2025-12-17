@@ -17,19 +17,21 @@
 
     <!-- Empty state -->
     <div *ngIf="typeWidgets.length === 0" class="text-center py-8 text-gray-400">
-      <p>Không có widget nào</p>
+      <p>No widget found</p>
     </div>
   </div>
 
   <!-- Footer buttons -->
-  <div class="flex justify-end gap-2 mt-6 pt-4 border-t border-gray-200">
-    <button class="px-4 py-2 text-sm font-medium text-white-700 bg-blue-100 hover:bg-blue-200 rounded transition-colors"
-      (click)="onSave()" type="button">
-      Lưu
+  <div class="flex justify-end gap-2 mt-6 pt-4 border-t border-gray-200 -m-4 p-4 bg-[#efeff0]">
+
+    <button class="scale-button secondary" (click)="onClose()" type="button">
+      Cancel
     </button>
-    <button class="px-4 py-2 text-sm font-medium text-gray-700 bg-gray-100 hover:bg-gray-200 rounded transition-colors"
-    (click)="onClose()" type="button">
-    Đóng
-  </button>
+
+
+    <button class="scale-button primary" (click)="onSave()" type="button">
+      Select
+    </button>
+
   </div>
 </div>
