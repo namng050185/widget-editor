@@ -92,4 +92,9 @@ export class App {
   onPreviewModeChange(mode: 'pc' | 'tablet' | 'mobile'): void {
     this.previewMode.set(mode);
   }
+
+  onWidgetsReorder(reorderedWidgets: Widget[]): void {
+    // Cập nhật thứ tự widgets
+    this.widgets = reorderedWidgets;
+  }
 }

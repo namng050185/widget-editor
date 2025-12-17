@@ -15,11 +15,14 @@ export class WidgetComponent {
   @Output() toggleHide = new EventEmitter<void>();
   @Output() widthChange = new EventEmitter<number>();
   @Output() modeChange = new EventEmitter<'pc' | 'tablet' | 'mobile'>();
+  @Output() widgetsReorder = new EventEmitter<Widget[]>();
 
   protected readonly isHidden = signal(false);
   protected readonly currentWidth = signal(300);
   protected readonly currentMode = signal<'pc' | 'tablet' | 'mobile'>('pc');
+  protected readonly isSortMode = signal(false);
   private readonly openWidgetConfigs = signal<Set<string>>(new Set());
+  private draggedWidgetId: string | null = null;
 
   onClose(): void {
     // Xử lý logic đóng widget
@@ -108,8 +111,68 @@ export class WidgetComponent {
   }
 
   onSort(): void {
-    // Xử lý logic sắp xếp widget
-    console.log('Sort clicked');
+    // Bật/tắt chế độ sort (drag & drop)
+    const newSortMode = !this.isSortMode();
+    this.isSortMode.set(newSortMode);
+    
+    // Nếu bật chế độ sort, đóng tất cả widget config đang mở
+    if (newSortMode) {
+      this.openWidgetConfigs.set(new Set());
+    }
+  }
+
+  onDragStart(event: DragEvent, widgetId: string): void {
+    if (!this.isSortMode()) return;
+    this.draggedWidgetId = widgetId;
+    if (event.dataTransfer) {
+      event.dataTransfer.effectAllowed = 'move';
+      event.dataTransfer.setData('text/plain', widgetId);
+    }
+    // Thêm class để hiển thị trạng thái đang kéo
+    const target = event.target as HTMLElement;
+    if (target.closest('.widget-item')) {
+      target.closest('.widget-item')?.classList.add('opacity-50');
+    }
+  }
+
+  onDragEnd(event: DragEvent): void {
+    const target = event.target as HTMLElement;
+    if (target.closest('.widget-item')) {
+      target.closest('.widget-item')?.classList.remove('opacity-50');
+    }
+    this.draggedWidgetId = null;
+  }
+
+  onDragOver(event: DragEvent): void {
+    if (!this.isSortMode() || !this.draggedWidgetId) return;
+    event.preventDefault();
+    if (event.dataTransfer) {
+      event.dataTransfer.dropEffect = 'move';
+    }
+  }
+
+  onDrop(event: DragEvent, targetWidgetId: string): void {
+    if (!this.isSortMode() || !this.draggedWidgetId || this.draggedWidgetId === targetWidgetId) {
+      return;
+    }
+    
+    event.preventDefault();
+    
+    // Tạo mảng mới với thứ tự đã thay đổi
+    const widgets = [...this.widgets];
+    const draggedIndex = widgets.findIndex(w => w.id === this.draggedWidgetId);
+    const targetIndex = widgets.findIndex(w => w.id === targetWidgetId);
+    
+    if (draggedIndex === -1 || targetIndex === -1) return;
+    
+    // Di chuyển widget
+    const [draggedWidget] = widgets.splice(draggedIndex, 1);
+    widgets.splice(targetIndex, 0, draggedWidget);
+    
+    // Emit event với thứ tự mới
+    this.widgetsReorder.emit(widgets);
+    
+    this.draggedWidgetId = null;
   }
 }
 
