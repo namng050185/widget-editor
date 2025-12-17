@@ -1,6 +1,8 @@
 import { Component, ViewEncapsulation, Output, EventEmitter, Input, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Widget } from '../types/widget.interface';
+import { AppendService } from '../services/append.service';
+import { ListTypeWidgetComponent } from './components/list-type-widget/list-type-widget.component';
 
 @Component({
   selector: 'app-widget',
@@ -11,7 +13,7 @@ import { Widget } from '../types/widget.interface';
 })
 export class WidgetComponent {
   @Input() widgets: Widget[] = [];
-  
+
   @Output() toggleHide = new EventEmitter<void>();
   @Output() widthChange = new EventEmitter<number>();
   @Output() modeChange = new EventEmitter<'pc' | 'tablet' | 'mobile'>();
@@ -23,6 +25,9 @@ export class WidgetComponent {
   protected readonly isSortMode = signal(false);
   private readonly openWidgetConfigs = signal<Set<string>>(new Set());
   private draggedWidgetId: string | null = null;
+
+  constructor(private appendService: AppendService) {
+  }
 
   onClose(): void {
     // Xử lý logic đóng widget
@@ -52,7 +57,7 @@ export class WidgetComponent {
   onToggleWidth(): void {
     const current = this.currentWidth();
     let nextWidth: number;
-    
+
     // Chuyển đổi: Narrow (300) -> Normal (500) -> Wide (800) -> Narrow (300)
     if (current === 300) {
       nextWidth = 500; // Narrow -> Normal
@@ -61,7 +66,7 @@ export class WidgetComponent {
     } else {
       nextWidth = 300; // Wide -> Narrow
     }
-    
+
     this.onWidthChange(nextWidth);
   }
 
@@ -81,13 +86,13 @@ export class WidgetComponent {
   toggleWidgetConfig(widgetId: string): void {
     const current = this.openWidgetConfigs();
     const newSet = new Set(current);
-    
+
     if (newSet.has(widgetId)) {
       newSet.delete(widgetId);
     } else {
       newSet.add(widgetId);
     }
-    
+
     this.openWidgetConfigs.set(newSet);
   }
 
@@ -106,15 +111,30 @@ export class WidgetComponent {
   }
 
   onAddWidget(): void {
-    // Xử lý logic thêm widget
-    console.log('Add widget clicked');
+    // Hiển thị modal với component
+    this.appendService.showModal({
+      component: ListTypeWidgetComponent,
+      data: {
+        typeWidgets: [
+          {
+            id: '1',
+            name: 'Widget 1',
+            description: 'Widget 1',
+            icon: 'icon-1'
+          }
+        ]
+      },
+      title: 'Chọn widget',
+      width: 'w-[800px] max-w-full',
+      closeOnBackdrop: true
+    });
   }
 
   onSort(): void {
     // Bật/tắt chế độ sort (drag & drop)
     const newSortMode = !this.isSortMode();
     this.isSortMode.set(newSortMode);
-    
+
     // Nếu bật chế độ sort, đóng tất cả widget config đang mở
     if (newSortMode) {
       this.openWidgetConfigs.set(new Set());
@@ -155,23 +175,23 @@ export class WidgetComponent {
     if (!this.isSortMode() || !this.draggedWidgetId || this.draggedWidgetId === targetWidgetId) {
       return;
     }
-    
+
     event.preventDefault();
-    
+
     // Tạo mảng mới với thứ tự đã thay đổi
     const widgets = [...this.widgets];
     const draggedIndex = widgets.findIndex(w => w.id === this.draggedWidgetId);
     const targetIndex = widgets.findIndex(w => w.id === targetWidgetId);
-    
+
     if (draggedIndex === -1 || targetIndex === -1) return;
-    
+
     // Di chuyển widget
     const [draggedWidget] = widgets.splice(draggedIndex, 1);
     widgets.splice(targetIndex, 0, draggedWidget);
-    
+
     // Emit event với thứ tự mới
     this.widgetsReorder.emit(widgets);
-    
+
     this.draggedWidgetId = null;
   }
 }

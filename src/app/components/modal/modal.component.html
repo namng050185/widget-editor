@@ -1,0 +1,22 @@
+<div *ngIf="isOpen"
+  class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 transition-opacity"
+  (click)="onBackdropClick()">
+  <div class="bg-white rounded-lg shadow-xl max-h-[90vh] overflow-auto" [class]="currentWidth"
+    (click)="$event.stopPropagation()">
+    <!-- Modal header -->
+    <div class="flex items-center justify-between p-4 border-b border-gray-200">
+      <h2 class="text-lg font-semibold text-gray-800">{{ currentTitle }}</h2>
+      <button #closeButton class="text-gray-400 hover:text-gray-600 transition-colors" (click)="onClose()"
+        type="button">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+        </svg>
+      </button>
+    </div>
+
+    <!-- Modal content - component will be rendered here via ViewContainerRef -->
+    <div class="p-4">
+      <ng-container #modalContent></ng-container>
+    </div>
+  </div>
+</div>

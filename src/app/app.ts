@@ -2,11 +2,12 @@ import { Component, signal, HostListener } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { WidgetComponent } from './widget/widget.component';
 import { PreviewComponent } from './preview/preview.component';
+import { ModalComponent } from './components/modal/modal.component';
 import { Widget } from './types/widget.interface';
 
 @Component({
   selector: 'app-root',
-  imports: [CommonModule, WidgetComponent, PreviewComponent],
+  imports: [CommonModule, WidgetComponent, PreviewComponent, ModalComponent],
   templateUrl: './app.html',
   styleUrl: './app.scss'
 })
