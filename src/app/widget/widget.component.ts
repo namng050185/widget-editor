@@ -2,11 +2,53 @@ import { Component, Output, EventEmitter, Input, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { AppendService } from '../services/append.service';
 import { ListTypeWidgetComponent } from './components/list-type-widget/list-type-widget.component';
+import { WidgetTitle } from './components/widget-title/widget-title';
+import { WidgetTile } from './components/widget-tile/widget-tile';
+import { WidgetHtml } from './components/widget-html/widget-html';
+import { WidgetHighlight } from './components/widget-highlight/widget-highlight';
+import { WidgetSearchBar } from './components/widget-search-bar/widget-search-bar';
+import { WidgetBanner } from './components/widget-banner/widget-banner';
+import { WidgetCategories } from './components/widget-categories/widget-categories';
+import { WidgetNews } from './components/widget-news/widget-news';
+import { WidgetTopArticles } from './components/widget-top-articles/widget-top-articles';
+import { WidgetSupport } from './components/widget-support/widget-support';
+import { WidgetHelpTopics } from './components/widget-help-topics/widget-help-topics';
+import { WidgetFaq } from './components/widget-faq/widget-faq';
+import { WidgetDownload } from './components/widget-download/widget-download';
+import { WidgetStepByStep } from './components/widget-step-by-step/widget-step-by-step';
+import { WidgetFeedback } from './components/widget-feedback/widget-feedback';
+import { WidgetProductComparison } from './components/widget-product-comparison/widget-product-comparison';
+import { WidgetProductFeature } from './components/widget-product-feature/widget-product-feature';
+import { WidgetImage } from './components/widget-image/widget-image';
+import { WidgetWebForm } from './components/widget-web-form/widget-web-form';
+import { WidgetEmbededView } from './components/widget-embeded-view/widget-embeded-view';
 
 @Component({
   selector: 'app-widget',
   standalone: true,
-  imports: [CommonModule],
+  imports: [
+    CommonModule,
+    WidgetTitle,
+    WidgetTile,
+    WidgetHtml,
+    WidgetHighlight,
+    WidgetSearchBar,
+    WidgetBanner,
+    WidgetCategories,
+    WidgetNews,
+    WidgetTopArticles,
+    WidgetSupport,
+    WidgetHelpTopics,
+    WidgetFaq,
+    WidgetDownload,
+    WidgetStepByStep,
+    WidgetFeedback,
+    WidgetProductComparison,
+    WidgetProductFeature,
+    WidgetImage,
+    WidgetWebForm,
+    WidgetEmbededView
+  ],
   templateUrl: './widget.component.html',
   styleUrl: './widget.component.scss'
 })
@@ -101,8 +143,16 @@ export class WidgetComponent {
 
   onDeleteWidget(widgetId: string): void {
     // Xử lý logic xóa widget
-    console.log('Delete widget:', widgetId);
-    // Có thể emit event lên parent component để xóa widget
+    const updatedWidgets = this.widgets.filter(w => w.id !== widgetId);
+    this.onWidgetChange.emit(updatedWidgets);
+  }
+
+  onWidgetConfigChange(updatedWidget: any, widgetId: string): void {
+    // Cập nhật widget trong danh sách
+    const updatedWidgets = this.widgets.map(w => 
+      w.id === widgetId ? { ...updatedWidget, id: widgetId } : w
+    );
+    this.onWidgetChange.emit(updatedWidgets);
   }
 
   trackByWidgetId(index: number, widget: any): string {
