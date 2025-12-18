@@ -1,14 +1,26 @@
-@for (item of widget.value.items; track item.id) {
-<div class="banner-item">
-    <div class="banner-image">
-        <img [src]="item.template.backgroundImage" [alt]="item.title">
-    </div>
-    <div class="banner-content">
-        <h3>{{item.title}}</h3>
-        <p>{{item.description}}</p>
-    </div>
-</div>
-}
+<!-- speed="500" loop="false" autoplay="true"  autoplay-delay="7000" -->
+<swiper-container [id]="'banner-'+widget.id" #swiperBanner>
+    @for (item of widget.value.items; track item.id || $index) {
+    <swiper-slide [key]="item.id || $index">
+        <div [class]="'banner-item '">
+            <div class="banner-image">
+                <img [src]="item.template.backgroundImage" [alt]="item.title">
+                @if (item.enableDarkOverlay) {<div class="overlay-container">
+                    @if (item.enableCrossLeft) {<div class="crossLeft"></div>}
+                    <div class="bg-overlay"
+                        [ngStyle]="{'width': item.enableCrossRight || item.enableCrossLeft ? 'calc(50% - 35px)' : '100%',}">
+                    </div>
+                    @if (item.enableCrossRight) {<div class="crossRight"></div>}
+                </div>}
+            </div>
+            <div class="banner-content" [ngStyle]="{'color': item.textColor || undefined }">
+                <div class="title">{{item.title}}</div>
+                <div class="description">{{item.description}}</div>
+            </div>
+        </div>
+    </swiper-slide>
+    }
+</swiper-container>
 @if (widget.value.items.length > 1) {
 <div class="banner-pagination">
     @for (item of widget.value.items; let i = $index; track $index) {

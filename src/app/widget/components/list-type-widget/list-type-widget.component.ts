@@ -38,4 +38,8 @@ export class ListTypeWidgetComponent {
   onClose(): void {
     this.close.emit(false);
   }
+
+  trackByWidgetId(index: number, widget: TypeWidget): string {
+    return widget.type || index.toString();
+  }
 }

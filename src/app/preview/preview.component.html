@@ -1,69 +1,71 @@
-@for (widget of widgets; track widget.id) {
-<div [class]="'px-4 pt-8 widget-'+ widget.type">
-  @switch (widget.type) {
-  @case ('title') {
-  <app-preview-title [widget]="widget" />
+<body>
+  @for (widget of widgets; track widget.id) {
+  <div [class]="'px-4 pt-8 widget-'+ widget.type">
+    @switch (widget.type) {
+    @case ('title') {
+    <app-preview-title [widget]="widget" />
+    }
+    @case ('tile') {
+    <app-preview-tile [widget]="widget" />
+    }
+    @case ('html') {
+    <app-preview-html [widget]="widget" />
+    }
+    @case ('highlight') {
+    <app-preview-highlight [widget]="widget" />
+    }
+    @case ('searchBar') {
+    <app-preview-search-bar [widget]="widget" />
+    }
+    @case ('banner') {
+    <app-preview-banner [widget]="widget" />
+    }
+    @case ('categories') {
+    <app-preview-categories [widget]="widget" />
+    }
+    @case ('news') {
+    <app-preview-news [widget]="widget" />
+    }
+    @case ('topArticles') {
+    <app-preview-top-articles [widget]="widget" />
+    }
+    @case ('support') {
+    <app-preview-support [widget]="widget" />
+    }
+    @case ('helpTopics') {
+    <app-preview-help-topics [widget]="widget" />
+    }
+    @case ('faq') {
+    <app-preview-faq [widget]="widget" />
+    }
+    @case ('download') {
+    <app-preview-download [widget]="widget" />
+    }
+    @case ('stepByStep') {
+    <app-preview-step-by-step [widget]="widget" />
+    }
+    @case ('feedback') {
+    <app-preview-feedback [widget]="widget" />
+    }
+    @case ('productComparison') {
+    <app-preview-product-comparison [widget]="widget" />
+    }
+    @case ('productFeature') {
+    <app-preview-product-feature [widget]="widget" />
+    }
+    @case ('image') {
+    <app-preview-image [widget]="widget" />
+    }
+    @case ('webForm') {
+    <app-preview-web-form [widget]="widget" />
+    }
+    @case ('embededView') {
+    <app-preview-embeded-view [widget]="widget" />
+    }
+    @default {
+    <div>Unknown widget type: {{ widget.type }}</div>
+    }
+    }
+  </div>
   }
-  @case ('tile') {
-  <app-preview-tile [widget]="widget" />
-  }
-  @case ('html') {
-  <app-preview-html [widget]="widget" />
-  }
-  @case ('highlight') {
-  <app-preview-highlight [widget]="widget" />
-  }
-  @case ('searchBar') {
-  <app-preview-search-bar [widget]="widget" />
-  }
-  @case ('banner') {
-  <app-preview-banner [widget]="widget" />
-  }
-  @case ('categories') {
-  <app-preview-categories [widget]="widget" />
-  }
-  @case ('news') {
-  <app-preview-news [widget]="widget" />
-  }
-  @case ('topArticles') {
-  <app-preview-top-articles [widget]="widget" />
-  }
-  @case ('support') {
-  <app-preview-support [widget]="widget" />
-  }
-  @case ('helpTopics') {
-  <app-preview-help-topics [widget]="widget" />
-  }
-  @case ('faq') {
-  <app-preview-faq [widget]="widget" />
-  }
-  @case ('download') {
-  <app-preview-download [widget]="widget" />
-  }
-  @case ('stepByStep') {
-  <app-preview-step-by-step [widget]="widget" />
-  }
-  @case ('feedback') {
-  <app-preview-feedback [widget]="widget" />
-  }
-  @case ('productComparison') {
-  <app-preview-product-comparison [widget]="widget" />
-  }
-  @case ('productFeature') {
-  <app-preview-product-feature [widget]="widget" />
-  }
-  @case ('image') {
-  <app-preview-image [widget]="widget" />
-  }
-  @case ('webForm') {
-  <app-preview-web-form [widget]="widget" />
-  }
-  @case ('embededView') {
-  <app-preview-embeded-view [widget]="widget" />
-  }
-  @default {
-  <div>Unknown widget type: {{ widget.type }}</div>
-  }
-  }
-</div>
-}
+</body>
