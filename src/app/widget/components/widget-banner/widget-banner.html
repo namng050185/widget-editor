@@ -1,1 +1,9 @@
-<p>widget-banner works!</p>
+@if(frm) {
+<form [formGroup]="frm">
+    @if(!detail) {
+    <app-banner-list [items]="frm.get('items')?.value" />
+    }@else {
+    <div>Please log in.</div>
+    }
+</form>
+}

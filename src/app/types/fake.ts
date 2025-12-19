@@ -34,9 +34,33 @@ export const fakeWidgets = [
             'acsi soleo ars caute amplitudo asper summisse amissio curatio averto basium sollicito sulum arto taceo averto solus tertius valeo tergo',
           title: 'tabella ago tego veritas articulus claro',
           background: {
-            id: 21,
+            id: 22,
             backgroundImage: '/banner/zukunftssicher_tsec_desktop.png',
             backgroundMobile: '/banner/zukunftssicher_tsec_mobil.png',
+          },
+          setting: {
+            enableOverlay: true,
+            crossMode: true,
+            backgroundColor: '#00000048',
+            textColor: '#fff',
+          },
+          button: {
+            enabled: true,
+            label: 'Learn More',
+            link: null,
+            template: 'primary', //
+            linkType: 'internal', // internal, external
+            openInNewTab: false, // true, false
+          }
+        },
+        {
+          description:
+            'acsi soleo ars caute amplitudo asper summisse amissio curatio averto basium sollicito sulum arto taceo averto solus tertius valeo tergo',
+          title: 'tabella ago tego veritas articulus claro',
+          background: {
+            id: 23,
+            backgroundImage: '/banner/support_tsec_desktop.png',
+            backgroundMobile: '/banner/support_tsec_mobil.png',
           },
           setting: {
             enableOverlay: true,
