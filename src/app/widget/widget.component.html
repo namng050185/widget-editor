@@ -90,69 +90,69 @@
         <div class="border-t border-gray-200 bg-gray-50" [class.hidden]="!isWidgetConfigOpen(widget.id)">
           <div class="p-3">
             @switch (widget.type) {
-              @case ('title') {
-                <app-widget-title [widget]="widget" (widgetChange)="onWidgetConfigChange($event, widget.id)" />
-              }
-              @case ('tile') {
-                <app-widget-tile [widget]="widget" (widgetChange)="onWidgetConfigChange($event, widget.id)" />
-              }
-              @case ('html') {
-                <app-widget-html [widget]="widget" (widgetChange)="onWidgetConfigChange($event, widget.id)" />
-              }
-              @case ('highlight') {
-                <app-widget-highlight [widget]="widget" (widgetChange)="onWidgetConfigChange($event, widget.id)" />
-              }
-              @case ('searchBar') {
-                <app-widget-search-bar [widget]="widget" (widgetChange)="onWidgetConfigChange($event, widget.id)" />
-              }
-              @case ('banner') {
-                <app-widget-banner [widget]="widget" (widgetChange)="onWidgetConfigChange($event, widget.id)" />
-              }
-              @case ('categories') {
-                <app-widget-categories [widget]="widget" (widgetChange)="onWidgetConfigChange($event, widget.id)" />
-              }
-              @case ('news') {
-                <app-widget-news [widget]="widget" (widgetChange)="onWidgetConfigChange($event, widget.id)" />
-              }
-              @case ('topArticles') {
-                <app-widget-top-articles [widget]="widget" (widgetChange)="onWidgetConfigChange($event, widget.id)" />
-              }
-              @case ('support') {
-                <app-widget-support [widget]="widget" (widgetChange)="onWidgetConfigChange($event, widget.id)" />
-              }
-              @case ('helpTopics') {
-                <app-widget-help-topics [widget]="widget" (widgetChange)="onWidgetConfigChange($event, widget.id)" />
-              }
-              @case ('faq') {
-                <app-widget-faq [widget]="widget" (widgetChange)="onWidgetConfigChange($event, widget.id)" />
-              }
-              @case ('download') {
-                <app-widget-download [widget]="widget" (widgetChange)="onWidgetConfigChange($event, widget.id)" />
-              }
-              @case ('stepByStep') {
-                <app-widget-step-by-step [widget]="widget" (widgetChange)="onWidgetConfigChange($event, widget.id)" />
-              }
-              @case ('feedback') {
-                <app-widget-feedback [widget]="widget" (widgetChange)="onWidgetConfigChange($event, widget.id)" />
-              }
-              @case ('productComparison') {
-                <app-widget-product-comparison [widget]="widget" (widgetChange)="onWidgetConfigChange($event, widget.id)" />
-              }
-              @case ('productFeature') {
-                <app-widget-product-feature [widget]="widget" (widgetChange)="onWidgetConfigChange($event, widget.id)" />
-              }
-              @case ('image') {
-                <app-widget-image [widget]="widget" (widgetChange)="onWidgetConfigChange($event, widget.id)" />
-              }
-              @case ('webForm') {
-                <app-widget-web-form [widget]="widget" (widgetChange)="onWidgetConfigChange($event, widget.id)" />
-              }
-              @case ('embededView') {
-                <app-widget-embeded-view [widget]="widget" (widgetChange)="onWidgetConfigChange($event, widget.id)" />
-              }
-              @default {
-                <div class="text-gray-500 text-sm">Unknown widget type: {{ widget.type }}</div>
-              }
+            @case ('title') {
+            <app-widget-title [widget]="widget" (widgetChange)="onWidgetConfigChange($event, widget.id)" />
+            }
+            @case ('tile') {
+            <app-widget-tile [widget]="widget" (widgetChange)="onWidgetConfigChange($event, widget.id)" />
+            }
+            @case ('html') {
+            <app-widget-html [widget]="widget" (widgetChange)="onWidgetConfigChange($event, widget.id)" />
+            }
+            @case ('highlight') {
+            <app-widget-highlight [widget]="widget" (widgetChange)="onWidgetConfigChange($event, widget.id)" />
+            }
+            @case ('searchBar') {
+            <app-widget-search-bar [widget]="widget" (widgetChange)="onWidgetConfigChange($event, widget.id)" />
+            }
+            @case ('banner') {
+            <app-widget-banner [widget]="widget" (widgetChange)="onWidgetConfigChange($event, widget.id)" />
+            }
+            @case ('categories') {
+            <app-widget-categories [widget]="widget" (widgetChange)="onWidgetConfigChange($event, widget.id)" />
+            }
+            @case ('news') {
+            <app-widget-news [widget]="widget" (widgetChange)="onWidgetConfigChange($event, widget.id)" />
+            }
+            @case ('topArticles') {
+            <app-widget-top-articles [widget]="widget" (widgetChange)="onWidgetConfigChange($event, widget.id)" />
+            }
+            @case ('support') {
+            <app-widget-support [widget]="widget" (widgetChange)="onWidgetConfigChange($event, widget.id)" />
+            }
+            @case ('helpTopics') {
+            <app-widget-help-topics [widget]="widget" (widgetChange)="onWidgetConfigChange($event, widget.id)" />
+            }
+            @case ('faq') {
+            <app-widget-faq [widget]="widget" (widgetChange)="onWidgetConfigChange($event, widget.id)" />
+            }
+            @case ('download') {
+            <app-widget-download [widget]="widget" (widgetChange)="onWidgetConfigChange($event, widget.id)" />
+            }
+            @case ('stepByStep') {
+            <app-widget-step-by-step [widget]="widget" (widgetChange)="onWidgetConfigChange($event, widget.id)" />
+            }
+            @case ('feedback') {
+            <app-widget-feedback [widget]="widget" (widgetChange)="onWidgetConfigChange($event, widget.id)" />
+            }
+            @case ('productComparison') {
+            <app-widget-product-comparison [widget]="widget" (widgetChange)="onWidgetConfigChange($event, widget.id)" />
+            }
+            @case ('productFeature') {
+            <app-widget-product-feature [widget]="widget" (widgetChange)="onWidgetConfigChange($event, widget.id)" />
+            }
+            @case ('image') {
+            <app-widget-image [widget]="widget" (widgetChange)="onWidgetConfigChange($event, widget.id)" />
+            }
+            @case ('webForm') {
+            <app-widget-web-form [widget]="widget" (widgetChange)="onWidgetConfigChange($event, widget.id)" />
+            }
+            @case ('embededView') {
+            <app-widget-embeded-view [widget]="widget" (widgetChange)="onWidgetConfigChange($event, widget.id)" />
+            }
+            @default {
+            <div class="text-gray-500 text-sm">Unknown widget type: {{ widget.type }}</div>
+            }
             }
           </div>
         </div>
@@ -163,23 +163,10 @@
         <p>No widget found</p>
       </div>
 
-      <!-- Add widget và Sort buttons -->
-      <div class="flex items-center justify-between p-2 border-t border-gray-200">
-        <!-- Nút Add Widget bên trái -->
-        <button class="scale-button ghost small" (click)="onAddWidget()" type="button">
-          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
-          </svg>
-          <span>Add Widget</span>
-        </button>
-
-        <!-- Nút Sort bên phải -->
-        <button [class]="'scale-button ghost small '" (click)="onSort()" type="button" [disabled]="!widgets.length">
-          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 6h18M7 12h10M4 18h16"></path>
-          </svg>
-          <span>{{ isSortMode() ? 'Done' : 'Sort' }}</span>
-        </button>
+      <div class="p-2 ">
+        <app-add-sort [title]="'Add Widget'" [disabled]="!widgets.length" [isSortMode]="isSortMode()"
+          (onAdd)="onAddWidget()" (onSort)="onSort()">
+        </app-add-sort>
       </div>
     </div>
   </div>

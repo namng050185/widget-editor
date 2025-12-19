@@ -22,6 +22,7 @@ import { WidgetProductFeature } from './components/widget-product-feature/widget
 import { WidgetImage } from './components/widget-image/widget-image';
 import { WidgetWebForm } from './components/widget-web-form/widget-web-form';
 import { WidgetEmbededView } from './components/widget-embeded-view/widget-embeded-view';
+import { AddSortComponent } from '../components/add-sort/add-sort';
 
 @Component({
   selector: 'app-widget',
@@ -47,7 +48,8 @@ import { WidgetEmbededView } from './components/widget-embeded-view/widget-embed
     WidgetProductFeature,
     WidgetImage,
     WidgetWebForm,
-    WidgetEmbededView
+    WidgetEmbededView,
+    AddSortComponent
   ],
   templateUrl: './widget.component.html',
   styleUrl: './widget.component.scss'
@@ -61,7 +63,7 @@ export class WidgetComponent {
   @Output() onWidgetChange = new EventEmitter<any[]>();
 
   protected readonly isHidden = signal(false);
-  protected readonly currentWidth = signal(300);
+  protected readonly currentWidth = signal(400);
   protected readonly currentMode = signal<'pc' | 'tablet' | 'mobile'>('pc');
   protected readonly isSortMode = signal(false);
   private readonly openWidgetConfigs = signal<Set<string>>(new Set());
@@ -99,13 +101,13 @@ export class WidgetComponent {
     const current = this.currentWidth();
     let nextWidth: number;
 
-    // Chuyển đổi: Narrow (300) -> Normal (500) -> Wide (800) -> Narrow (300)
-    if (current === 300) {
-      nextWidth = 500; // Narrow -> Normal
-    } else if (current === 500) {
+    // Chuyển đổi: Narrow (400) -> Normal (600) -> Wide (800) -> Narrow (400)
+    if (current === 400) {
+      nextWidth = 600; // Narrow -> Normal
+    } else if (current === 600) {
       nextWidth = 800; // Normal -> Wide
     } else {
-      nextWidth = 300; // Wide -> Narrow
+      nextWidth = 400; // Wide -> Narrow
     }
 
     this.onWidthChange(nextWidth);
@@ -113,8 +115,8 @@ export class WidgetComponent {
 
   getWidthLabel(): string {
     const width = this.currentWidth();
-    if (width === 300) return 'Narrow';
-    if (width === 500) return 'Normal';
+    if (width === 400) return 'Narrow';
+    if (width === 600) return 'Normal';
     if (width === 800) return 'Wide';
     return 'Narrow';
   }

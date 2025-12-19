@@ -1,1 +1,17 @@
-<p>banner-list works!</p>
+@if(list) {
+<div>
+    @for (item of list; track $index) {
+    <div class="mt-2 relative inset-0">
+        <img [src]="item.background.backgroundImage" [alt]="item.title" class="w-full h-full object-cover">
+        <div class="absolute top-2 right-2">
+            <app-edit-delete (onEdit)="onEdit.emit(item)" (onDelete)="onDelete.emit(item)"></app-edit-delete>
+        </div>
+    </div>
+    }
+</div>
+}
+<div class="pt-2">
+    <app-add-sort [title]="'Add'" [disabled]="!list.length" [isSortMode]="isSortMode()" (onAdd)="onAdd.emit()"
+        (onSort)="onSort.emit()">
+    </app-add-sort>
+</div>

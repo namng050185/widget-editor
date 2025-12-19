@@ -13,7 +13,7 @@ import { fakeWidgets } from './types/fake';
 })
 export class App {
   protected readonly title = signal('widget-editor');
-  protected readonly leftPanelWidth = signal(300);
+  protected readonly leftPanelWidth = signal(400);
   protected readonly isLeftPanelHidden = signal(false);
   protected readonly previewMode = signal<'pc' | 'tablet' | 'mobile'>('pc');
   protected readonly widgets = signal<any[]>(fakeWidgets);
@@ -58,8 +58,8 @@ export class App {
   }
 
   onShowLeftPanel(): void {
-    // Hiện lại panel với độ rộng Narrow (300px)
-    this.leftPanelWidth.set(300);
+    // Hiện lại panel với độ rộng Narrow (400px)
+    this.leftPanelWidth.set(400);
     this.isLeftPanelHidden.set(false);
   }
 
@@ -72,7 +72,6 @@ export class App {
   }
 
   onWidgetChange(widgets: any[]): void {
-    console.log('widgets', widgets);
     this.widgets.set(widgets);
   }
 }

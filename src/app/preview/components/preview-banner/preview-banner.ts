@@ -20,7 +20,6 @@ export class PreviewBanner implements AfterViewInit {
   }
 
   ngOnInit(): void {
-    console.log('Banner widget', this.widget);
   }
 
   ngAfterViewInit(): void {

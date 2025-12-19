@@ -1,0 +1,18 @@
+<!-- Add  và Sort buttons -->
+<div class="flex items-center justify-between ">
+    <!-- Nút Add  bên trái -->
+    <button class="scale-button ghost small" (click)="onAdd.emit()" type="button">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
+        </svg>
+        <span>{{ title }}</span>
+    </button>
+
+    <!-- Nút Sort bên phải -->
+    <button [class]="'scale-button ghost small '" (click)="onSort.emit()" type="button" [disabled]="disabled">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 6h18M7 12h10M4 18h16"></path>
+        </svg>
+        <span>{{ isSortMode ? 'Done' : 'Sort' }}</span>
+    </button>
+</div>
