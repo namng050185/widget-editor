@@ -1,6 +1,6 @@
 <body>
   @for (widget of widgets; track widget.id) {
-  <div [class]="'px-4 pt-8 widget-'+ widget.type">
+  <div [class]="'mx-4 mt-8 widget-'+ widget.type">
     @switch (widget.type) {
     @case ('title') {
     <app-preview-title [widget]="widget" />

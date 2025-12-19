@@ -1,26 +1,33 @@
-<!-- speed="500" loop="false" autoplay="true"  autoplay-delay="7000" -->
-<swiper-container [id]="'banner-'+widget.id" #swiperBanner>
-    @for (item of widget.value.items; track item.id || $index) {
-    <swiper-slide [key]="item.id || $index">
-        <div [class]="'banner-item '">
-            <div class="banner-image">
-                <img [src]="item.template.backgroundImage" [alt]="item.title">
-                @if (item.enableDarkOverlay) {<div class="overlay-container">
-                    @if (item.enableCrossLeft) {<div class="crossLeft"></div>}
-                    <div class="bg-overlay"
-                        [ngStyle]="{'width': item.enableCrossRight || item.enableCrossLeft ? 'calc(50% - 35px)' : '100%',}">
-                    </div>
-                    @if (item.enableCrossRight) {<div class="crossRight"></div>}
-                </div>}
+<div class="banner-container">
+    <swiper-container [id]="'banner-'+widget.id" #swiperBanner speed="500" loop="false" autoplay="true"
+        autoplay-delay="7000">
+        @for (item of widget.value.items; track item.id || $index) {
+        <swiper-slide [key]="item.id || $index">
+            <div [class]="'banner-item '">
+                <div class="banner-image">
+                    <img [src]="item.background.backgroundImage" [alt]="item.title" class="hidden sm:block">
+                    <img [src]="item.background.backgroundMobile" [alt]="item.title" class="block sm:hidden">
+                    @if (item?.setting?.enableOverlay) {<div class="overlay-container">
+                        <div class="bg-overlay"
+                            [ngStyle]="{'width': item?.setting?.crossMode!==null ? '50%' : '100%', 'background-color': item?.setting?.backgroundColor || undefined}">
+                        </div>
+                        @if (item?.setting?.crossMode===false) {<div></div>}
+                        @if (item?.setting?.crossMode===true) {<div class="crossRight"
+                            [ngStyle]="{'border-left-color': item?.setting?.backgroundColor || undefined}"></div>}
+                    </div>}
+                </div>
+                <div class="banner-content" [ngStyle]="{'color': item?.setting?.textColor || undefined }">
+                    <div class="title">{{item.title}}</div>
+                    <div class="description">{{item.description}}</div>
+                    @if (item?.button?.enabled) {<div class="pt-4">
+                        <button [class]="'btn-button-style ' + item?.button?.template || 'primary'">{{item?.button?.label}}</button>
+                    </div>}
+                </div>
             </div>
-            <div class="banner-content" [ngStyle]="{'color': item.textColor || undefined }">
-                <div class="title">{{item.title}}</div>
-                <div class="description">{{item.description}}</div>
-            </div>
-        </div>
-    </swiper-slide>
-    }
-</swiper-container>
+        </swiper-slide>
+        }
+    </swiper-container>
+</div>
 @if (widget.value.items.length > 1) {
 <div class="banner-pagination">
     @for (item of widget.value.items; let i = $index; track $index) {
