@@ -1,17 +1,39 @@
 @if(list) {
 <div>
     @for (item of list; track $index) {
-    <div class="mt-2 relative inset-0">
-        <img [src]="item.background.backgroundImage" [alt]="item.title" class="w-full h-full object-cover">
+    <div class="banner-item mt-2 relative inset-0" [class.cursor-move]="isSortMode()"
+        [class.opacity-50]="isSortMode() && draggedIndex === $index" [draggable]="isSortMode() && !disabled"
+        (dragstart)="onDragStart($event, $index)" (dragend)="onDragEnd($event)" (dragover)="onDragOver($event)"
+        (drop)="onDrop($event, $index)">
+
+        <!--CUSTOM ITEM HERE-->
+        <img [src]="item.background?.backgroundImage || item.template?.backgroundImage" [alt]="item.title"
+            class="w-full h-full object-cover">
+        <!--END CUSTOM ITEM HERE-->
+        
+        @if (!isSortMode()) {
         <div class="absolute top-2 right-2">
             <app-edit-delete (onEdit)="onEdit.emit(item)" (onDelete)="onDelete.emit(item)"></app-edit-delete>
         </div>
+        }
+        @if (isSortMode()) {
+        <div class="absolute top-2 left-2">
+            <button class="scale-button blue small cursor-move" (click)="onEdit.emit()" type="button">
+                <svg xmlns="http://www.w3.org/2000/svg" id="icon_action_menu_default"
+                    data-name="icon/action/menu/default" width="17" height="12.5" viewBox="0 0 17 12.5">
+                    <path id="Combined_Shape" data-name="Combined Shape"
+                        d="M1.063,12.5C.5,12.5,0,12.15,0,11.75S.5,11,1.063,11H15.937C16.5,11,17,11.35,17,11.75s-.5.75-1.063.75ZM.75,7a.75.75,0,0,1,0-1.5h15.5a.75.75,0,0,1,0,1.5Zm0-5.5A.769.769,0,0,1,0,.75.769.769,0,0,1,.75,0h15.5A.769.769,0,0,1,17,.75a.769.769,0,0,1-.75.751Z"
+                        fill="#FFF" />
+                </svg>
+            </button>
+        </div>
+        }
     </div>
     }
 </div>
 }
 <div class="pt-2">
     <app-add-sort [title]="'Add'" [disabled]="!list.length" [isSortMode]="isSortMode()" (onAdd)="onAdd.emit()"
-        (onSort)="onSort.emit()">
+        (onSort)="toggleSortMode()">
     </app-add-sort>
 </div>

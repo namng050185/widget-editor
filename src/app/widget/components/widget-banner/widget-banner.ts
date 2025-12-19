@@ -52,4 +52,19 @@ export class WidgetBanner {
   onSort(): void {
     console.log('onSort');
   }
+
+  onReorder(reorderedItems: any[]): void {
+    // Cập nhật form với thứ tự mới
+    this.frm.patchValue({ items: reorderedItems });
+    
+    // Emit widget change với giá trị mới
+    const updatedWidget = {
+      ...this.widget,
+      value: {
+        ...this.frm.value,
+        items: reorderedItems
+      }
+    };
+    this.widgetChange.emit(updatedWidget);
+  }
 }

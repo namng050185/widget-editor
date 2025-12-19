@@ -1,7 +1,11 @@
 @if(frm) {
 <form [formGroup]="frm">
     @if(!detail) {
-        <app-banner-list [list]="frm.value.items" [disabled]="disabled" (onEdit)="detail = $event" />
+        <app-banner-list 
+            [list]="frm.value.items" 
+            [disabled]="disabled" 
+            (onEdit)="detail = $event"
+            (onReorder)="onReorder($event)" />
     }@else {
         <app-banner-detail [detail]="detail" />
     }
