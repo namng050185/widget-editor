@@ -1,21 +1,13 @@
 import { Component, Input, Output, EventEmitter, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { BannerList } from './banner-list/banner-list';
 import { BannerDetail } from './banner-detail/banner-detail';
-import { BannerSelect } from './banner-select/banner-select';
-import { AddSortComponent } from '../../../components/add-sort/add-sort';
+import { WidgetList } from '../../../components/widget-list/widget-list';
 
 @Component({
   selector: 'app-widget-banner',
   standalone: true,
-  imports: [
-    CommonModule,
-    ReactiveFormsModule,
-    BannerList,
-    BannerDetail,
-    BannerSelect,
-  ],
+  imports: [CommonModule, ReactiveFormsModule, WidgetList, BannerDetail],
   templateUrl: './widget-banner.html',
   styleUrl: './widget-banner.scss',
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
@@ -33,7 +25,7 @@ export class WidgetBanner {
   ngOnInit(): void {
     const value = this.widget?.value || {};
     const id = this.widget?.id;
-    this.frm.setValue({id, ...value});
+    this.frm.setValue({ id, ...value });
     if (this.disabled) {
       this.frm.disable();
     } else {
@@ -43,27 +35,34 @@ export class WidgetBanner {
     }
   }
 
-  
-
-  onAdd(): void {
-    console.log('onAdd');
-  }
-
-  onSort(): void {
-    console.log('onSort');
+  onAction(event: any): void {
+    console.log('onAction', event);
+    switch (event.action) {
+      case 'add':
+        break;
+      case 'edit':
+        this.detail = event.data;
+        break;
+      case 'delete':
+        break;
+      case 'reorder':
+        this.onReorder(event.data);
+        break;
+      default:
+        break;
+    }
   }
 
   onReorder(reorderedItems: any[]): void {
     // Cập nhật form với thứ tự mới
     this.frm.patchValue({ items: reorderedItems });
-    
     // Emit widget change với giá trị mới
     const updatedWidget = {
       ...this.widget,
       value: {
         ...this.frm.value,
-        items: reorderedItems
-      }
+        items: reorderedItems,
+      },
     };
     this.widgetChange.emit(updatedWidget);
   }

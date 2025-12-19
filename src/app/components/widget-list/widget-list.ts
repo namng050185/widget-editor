@@ -1,28 +1,31 @@
-import { Component, EventEmitter, Input, Output, signal } from '@angular/core';
+import { Component, EventEmitter, Input, Output, signal, TemplateRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { EditDeleteComponent } from '../../../../components/edit-delete/edit-delete';
-import { AddSortComponent } from '../../../../components/add-sort/add-sort';
+import { EditDeleteComponent } from '../edit-delete/edit-delete';
+import { AddSortComponent } from '../add-sort/add-sort';
+import { AppendService } from '../../services/append.service';
 
 @Component({
-  selector: 'app-banner-list',
+  selector: 'app-widget-list',
   standalone: true,
   imports: [CommonModule, EditDeleteComponent, AddSortComponent],
-  templateUrl: './banner-list.html',
-  styleUrl: './banner-list.css',
+  templateUrl: './widget-list.html',
+  styleUrl: './widget-list.scss',
 })
-export class BannerList {
+export class WidgetList {
+  @Input() absolute: boolean = false;
   @Input() disabled: boolean = false;
   @Input() list: any[] = [];
-  @Output() onEdit = new EventEmitter<any>();
-  @Output() onDelete = new EventEmitter<any>();
-  @Output() onAdd = new EventEmitter<any>();
-  @Output() onReorder = new EventEmitter<any[]>();
+  @Input() itemTemplate!: TemplateRef<any>;
+  @Output() onAction = new EventEmitter<any>();
 
   protected readonly isSortMode = signal(false);
   protected draggedIndex: number | null = null;
 
-  ngOnInit(): void {
+  constructor(private readonly appendService: AppendService) {
+    this.isSortMode.set(false);
   }
+
+  ngOnInit(): void {}
 
   toggleSortMode(): void {
     const newSortMode = !this.isSortMode();
@@ -38,15 +41,15 @@ export class BannerList {
     }
     // Thêm class để hiển thị trạng thái đang kéo
     const target = event.target as HTMLElement;
-    if (target.closest('.banner-item')) {
-      target.closest('.banner-item')?.classList.add('opacity-50');
+    if (target.closest('.widget-item')) {
+      target.closest('.widget-item')?.classList.add('opacity-50');
     }
   }
 
   onDragEnd(event: DragEvent): void {
     const target = event.target as HTMLElement;
-    if (target.closest('.banner-item')) {
-      target.closest('.banner-item')?.classList.remove('opacity-50');
+    if (target.closest('.widget-item')) {
+      target.closest('.widget-item')?.classList.remove('opacity-50');
     }
     this.draggedIndex = null;
   }
@@ -69,16 +72,28 @@ export class BannerList {
     // Tạo mảng mới với thứ tự đã thay đổi
     const items = [...this.list];
     const draggedItem = items[this.draggedIndex];
-    
+
     // Xóa item ở vị trí cũ
     items.splice(this.draggedIndex, 1);
-    
+
     // Chèn item vào vị trí mới
     items.splice(targetIndex, 0, draggedItem);
 
     // Emit event với thứ tự mới
-    this.onReorder.emit(items);
+    this.onAction.emit({ action: 'reorder', data: items });
 
     this.draggedIndex = null;
+  }
+
+  onAdd() {
+    this.onAction.emit({ action: 'add' });
+  }
+
+  onEdit(item: any) {
+    this.onAction.emit({ action: 'edit', data: item });
+  }
+
+  onDelete(item: any) {
+    this.onAction.emit({ action: 'delete', data: item });
   }
 }

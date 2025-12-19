@@ -1,14 +1,15 @@
 @if(frm) {
 <form [formGroup]="frm">
     @if(!detail) {
-        <app-banner-list 
-            [list]="frm.value.items" 
-            [disabled]="disabled" 
-            (onEdit)="detail = $event"
-            (onReorder)="onReorder($event)" />
+    <ng-template #itemTemplate let-item let-index="index">
+        <img [src]="item.background?.backgroundImage || item.template?.backgroundImage" [alt]="item.title"
+            class="w-full h-full object-cover rounded-lg">
+    </ng-template>
+    <app-widget-list [list]="frm.value.items" [disabled]="disabled" [absolute]="true" [itemTemplate]="itemTemplate"
+        (onAction)="onAction($event)">
+    </app-widget-list>
     }@else {
-        <app-banner-detail [detail]="detail" />
+    <app-banner-detail [detail]="detail" />
     }
-   
 </form>
 }

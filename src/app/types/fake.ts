@@ -8,7 +8,7 @@ export const fakeWidgets = [
         {
           description:
             'acsi soleo ars caute amplitudo asper summisse amissio curatio averto basium sollicito sulum arto taceo averto solus tertius valeo tergo',
-          title: 'tabella ago tego veritas articulus claro',
+          title: 'Deficio subvenio aeternus',
           background: {
             id: 21,
             backgroundImage: '/banner/verfugbar_tsec_desktop.png',
@@ -27,7 +27,7 @@ export const fakeWidgets = [
             template: 'black', //
             linkType: 'internal', // internal, external
             openInNewTab: false, // true, false
-          }
+          },
         },
         {
           description:
@@ -51,12 +51,12 @@ export const fakeWidgets = [
             template: 'primary', //
             linkType: 'internal', // internal, external
             openInNewTab: false, // true, false
-          }
+          },
         },
         {
           description:
             'acsi soleo ars caute amplitudo asper summisse amissio curatio averto basium sollicito sulum arto taceo averto solus tertius valeo tergo',
-          title: 'tabella ago tego veritas articulus claro',
+          title: 'summisse amissio curatio',
           background: {
             id: 23,
             backgroundImage: '/banner/support_tsec_desktop.png',
@@ -75,7 +75,7 @@ export const fakeWidgets = [
             template: 'primary', //
             linkType: 'internal', // internal, external
             openInNewTab: false, // true, false
-          }
+          },
         },
       ],
     },
